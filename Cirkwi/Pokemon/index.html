@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pokemon a Sacha</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+function CreateFiche(nomPokemon){
+	var fiche = $('<div class="default fiche"></div>');
+    var titreFiche = $('<div class="title"><div class="arrow">&#9654;</div><div class="pokemon-name">'+ nomPokemon + '</div></div>');
+	fiche.append(titreFiche);
+	var contenuFiche = $('<div class="content"><div class="content-image"><img src="'+ nomPokemon +'.png" /></div><div class="content-text"><div class="text"> Description de '+ nomPokemon.toLowerCase() +'</div></div></div>');
+	fiche.append(contenuFiche);
+    fiche.click(function() {
+        $(this).toggleClass("selected default");
+		var divArrow = $(this).find(".arrow");
+		if ($(this).hasClass("selected")) {
+			divArrow.html("&#9660;");
+        } else {
+			divArrow.html("&#9654;");
+		}
+    });
+    $("body").append(fiche);
+}
+$(document).ready(function(){
+	CreateFiche("Dracaufeu");
+	CreateFiche("Pikachu");
+	CreateFiche("Carapuce");
+});
+</script>
+<style>
+
+.fiche {
+	margin-top : 10px;
+}
+
+.title {
+	border : solid 2px rgb(211,211,211);
+	height: 30px;
+	line-height: 30px;
+	width: 100%;
+}
+
+.default .title {
+    background-color: rgb(245, 245, 245);
+    color: black;
+}
+
+.selected .title{
+    background-color: rgb(0,125,255);
+    color: white;
+	border-bottom : 0px ;
+}
+
+.arrow {
+	float: left;
+	width: 30px;
+	height: 30px;
+	text-align: right;
+	font-size : 10px
+}
+
+.pokemon-name {
+	float: left;
+	height: 30px;
+	margin-left : 10px
+}
+
+.content {
+    display: none;
+	width: 100%;
+	border : solid 2px rgb(211,211,211);
+	border-top : 0px ;
+}
+
+.selected .content {
+	width: 100%;
+    display: flex;
+	flex-wrap: wrap;
+}
+
+.content .content-image, .content .content-text{
+    width: 50%;
+}
+.content-image {
+	height: 250px;
+}
+
+.content-image img {
+    max-width: 100%;
+    height: 90%;
+    display: block;
+    margin: 0 auto;
+}
+
+.content-text {
+	min-height: 40px;
+	text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.content-image .text {
+    max-width: 100%;
+    height: 30px;
+    display: block;
+    margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+	.content .content-image, .content .content-text{
+		width: 100%;
+	}
+}
+</style>
+</head>
+<body>
+</body>
+</html>
